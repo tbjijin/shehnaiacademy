@@ -1,26 +1,105 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #faf7f2;
+  --foreground: #2c1810;
+  --brand-red: #8b1538;
+  --brand-red-dark: #6d0f2b;
+  --brand-orange: #c45c26;
+  --brand-gold: #c9a227;
+  --brand-gold-light: #e8d5a3;
+  --brand-cream: #faf7f2;
+  --muted: #5c4a42;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-brand-red: var(--brand-red);
+  --color-brand-red-dark: var(--brand-red-dark);
+  --color-brand-orange: var(--brand-orange);
+  --color-brand-gold: var(--brand-gold);
+  --color-brand-gold-light: var(--brand-gold-light);
+  --color-brand-cream: var(--brand-cream);
+  --color-muted: var(--muted);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Slightly larger type on phones for readability */
+@media (max-width: 639px) {
+  html {
+    font-size: 17px;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+.font-heading {
+  font-family: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
+}
+
+.font-body {
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Soft horizontal fade on hero photo strip — mobile only; md+ uses side overlays in HomeHero */
+.hero-feather-edge {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+}
+
+@media (min-width: 768px) {
+  .hero-feather-edge {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-scroll-reverse {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none !important;
+  }
 }
