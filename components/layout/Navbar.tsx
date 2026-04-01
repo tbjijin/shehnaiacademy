@@ -1,6 +1,7 @@
 "use client";
 
 import { WhatsAppGlyph } from "@/components/icons/WhatsAppGlyph";
+import { InstallShortcutButton } from "@/components/layout/InstallShortcutButton";
 import { fontSchoolName } from "@/lib/fonts";
 import { site, siteUrls } from "@/lib/site";
 import { BookOpen, House, Info } from "lucide-react";
@@ -38,12 +39,15 @@ function BrandTitleBlock({ className = "" }: { className?: string }) {
 function ContactColumn() {
   return (
     <div className="flex shrink-0 flex-col items-end gap-1 border-l border-black/[0.08] pl-3 md:pl-4">
-      <Link
-        href={contactHref}
-        className="inline-flex min-h-[40px] items-center justify-center rounded-full bg-[#c45c26] px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-[#a84d20] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 md:min-h-[40px] lg:px-5"
-      >
-        Contact
-      </Link>
+      <div className="flex items-center gap-2">
+        <InstallShortcutButton className="hidden md:block" />
+        <Link
+          href={contactHref}
+          className="inline-flex min-h-[40px] items-center justify-center rounded-full bg-[#c45c26] px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-[#a84d20] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 md:min-h-[40px] lg:px-5"
+        >
+          Contact
+        </Link>
+      </div>
       <span className="inline-flex items-center gap-1.5">
         <a
           href={siteUrls.whatsapp}
@@ -162,12 +166,15 @@ export function Navbar({ logoSrc }: { logoSrc: string }) {
               })}
             </nav>
             <div className="flex shrink-0 flex-col items-end gap-1 border-l border-black/[0.08] pl-2">
-              <Link
-                href={contactHref}
-                className="inline-flex min-h-[44px] items-center justify-center rounded-full bg-[#c45c26] px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-[#a84d20] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
-              >
-                Contact
-              </Link>
+              <div className="flex items-center gap-2">
+                <InstallShortcutButton className="md:hidden" />
+                <Link
+                  href={contactHref}
+                  className="inline-flex min-h-[44px] items-center justify-center rounded-full bg-[#c45c26] px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-[#a84d20] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2"
+                >
+                  Contact
+                </Link>
+              </div>
               <span className="inline-flex items-center justify-end gap-1.5">
                 <a
                   href={siteUrls.whatsapp}

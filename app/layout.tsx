@@ -11,6 +11,18 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: { default: site.name, template: `%s · ${site.shortName}` },
   description: site.description,
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    title: site.shortName,
+    statusBarStyle: "black-translucent",
+  },
+  icons: {
+    icon: [
+      { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icons/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
   openGraph: {
     title: site.name,
     description: site.description,

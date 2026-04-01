@@ -3,7 +3,7 @@
 import { site } from "@/lib/site";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useCallback, useEffect, useState, type KeyboardEvent } from "react";
 
 const IMAGE_INTERVAL_MS = 3000;
@@ -92,8 +92,8 @@ function DesktopPhotoReel({
   );
 }
 
-const controlBtnClass =
-  "inline-flex size-10 shrink-0 items-center justify-center rounded-full text-white transition hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent disabled:pointer-events-none disabled:opacity-35";
+const edgeArrowBtnClass =
+  "pointer-events-auto inline-flex size-11 items-center justify-center rounded-full border border-white/25 bg-neutral-900/35 text-white shadow-md backdrop-blur-md transition hover:bg-neutral-900/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent disabled:pointer-events-none disabled:opacity-40";
 
 export function HomeHero({ heroImages }: { heroImages: readonly string[] }) {
   const [index, setIndex] = useState(0);
@@ -111,6 +111,8 @@ export function HomeHero({ heroImages }: { heroImages: readonly string[] }) {
   const goPrev = useCallback(() => {
     setIndex((i) => (i - 1 + nSlides) % nSlides);
   }, [nSlides]);
+
+  const togglePaused = () => setPaused((p) => !p);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -155,6 +157,10 @@ export function HomeHero({ heroImages }: { heroImages: readonly string[] }) {
           aria-label="Featured photos"
           tabIndex={0}
           onKeyDown={onCarouselKeyDown}
+          onClick={() => {
+            if (!multi) return;
+            togglePaused();
+          }}
         >
           {/* Mobile: single full-width strip */}
           <div className="relative h-full w-full overflow-hidden md:hidden">
@@ -186,42 +192,41 @@ export function HomeHero({ heroImages }: { heroImages: readonly string[] }) {
           </div>
 
           {multi && (
-            <div
-              className="pointer-events-none absolute inset-x-0 bottom-2 z-20 flex justify-center md:bottom-3"
-              role="group"
-              aria-label="Slideshow controls"
-            >
-              <div className="pointer-events-auto flex items-center gap-0.5 rounded-full border border-white/25 bg-neutral-900/50 px-1 py-1 shadow-md backdrop-blur-md">
+            <>
+              {/* Edge arrows — don’t cover photo center */}
+              <div
+                className="pointer-events-none absolute inset-y-0 left-2 z-20 flex items-center md:left-3"
+                aria-hidden={false}
+              >
                 <button
                   type="button"
-                  className={controlBtnClass}
+                  className={edgeArrowBtnClass}
                   aria-label="Previous slide"
-                  onClick={goPrev}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    goPrev();
+                  }}
                 >
-                  <ChevronLeft className="size-5" strokeWidth={2.25} aria-hidden />
-                </button>
-                <button
-                  type="button"
-                  className={controlBtnClass}
-                  aria-label={paused ? "Play slideshow" : "Pause slideshow"}
-                  onClick={() => setPaused((p) => !p)}
-                >
-                  {paused ? (
-                    <Play className="size-5 fill-white text-white" aria-hidden />
-                  ) : (
-                    <Pause className="size-5" strokeWidth={2.25} aria-hidden />
-                  )}
-                </button>
-                <button
-                  type="button"
-                  className={controlBtnClass}
-                  aria-label="Next slide"
-                  onClick={goNext}
-                >
-                  <ChevronRight className="size-5" strokeWidth={2.25} aria-hidden />
+                  <ChevronLeft className="size-6" strokeWidth={2.25} aria-hidden />
                 </button>
               </div>
-            </div>
+              <div
+                className="pointer-events-none absolute inset-y-0 right-2 z-20 flex items-center md:right-3"
+                aria-hidden={false}
+              >
+                <button
+                  type="button"
+                  className={edgeArrowBtnClass}
+                  aria-label="Next slide"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    goNext();
+                  }}
+                >
+                  <ChevronRight className="size-6" strokeWidth={2.25} aria-hidden />
+                </button>
+              </div>
+            </>
           )}
         </div>
       </div>
