@@ -74,6 +74,16 @@ export function Footer({ logoSrc }: { logoSrc: string }) {
                   {site.email}
                 </a>
               </li>
+              <li>
+                <a
+                  className="hover:text-brand-red"
+                  href={siteUrls.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {site.websiteDisplay}
+                </a>
+              </li>
             </ul>
           </div>
         </div>

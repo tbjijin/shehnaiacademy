@@ -1,48 +1,87 @@
 export type Teacher = {
   id: string;
+  /**
+   * Match files under `public/images/teacher/` whose basename ends with `_${photoSuffix}.ext`
+   * (e.g. `Sangeeth_violin_eastern.jpeg`). Use empty string if no photo key yet.
+   */
+  photoSuffix: string;
   name: string;
-  nameMl: string;
   role: string;
-  roleMl: string;
   bio: string;
-  bioMl: string;
-  /** Path under `public`, e.g. `/images/teacher/name.jpg`. Omit to use nth file from that folder. */
+  /** Optional explicit path under `public`; overrides suffix matching when set. */
   image?: string;
 };
 
-/**
- * Faculty copy lives here. Photos: add files under `public/images/teacher/` (sorted names
- * map to teachers in array order), or set `image` on each entry.
- */
-export const teachers: Teacher[] = [
+export type TeacherSection = {
+  id: string;
+  title: string;
+  teachers: Teacher[];
+};
+
+export const teacherSections: TeacherSection[] = [
   {
-    id: "faculty-1",
-    name: "Vocal faculty",
-    nameMl: "വോക്കൽ അധ്യാപകൻ",
-    role: "Carnatic vocal · Foundation & grades",
-    roleMl: "കർണാടക വോക്കൽ · അടിസ്ഥാനവും ഗ്രേഡുകളും",
-    bio: "Guides beginners through voice culture, shruti, and repertoire with patient, structured lessons.",
-    bioMl:
-      "ശ്രുതി, സ്വരവ്യവസ്ഥ, കൃതികൾ എന്നിവ ക്ഷമയോടെയും ഘടനാബദ്ധമായി പഠിപ്പിക്കുന്നു.",
+    id: "music-vocal",
+    title: "Music (Vocal)",
+    teachers: [
+      {
+        id: "teacher-music-vocal",
+        photoSuffix: "music",
+        name: "Bineesh Krishnan",
+        role: "Vocal · Higher Grade in South Indian Music, Madras",
+        bio: "With over 20 years of expertise, guiding students in Classical vocal training. Focuses on building a strong foundation through structured, graded lessons while developing students' performance skills and confidence.",
+      },
+    ],
   },
   {
-    id: "faculty-2",
-    name: "Dance faculty",
-    nameMl: "നൃത്ത അധ്യാപിക",
-    role: "Classical dance · Performance coaching",
-    roleMl: "ക്ലാസിക്കൽ നൃത്തം · പ്രകടന പരിശീലനം",
-    bio: "Focuses on posture, rhythm, and stage presence so students grow in confidence and expression.",
-    bioMl:
-      "ഭംഗി, താളം, വേദി സാന്നിധ്യം എന്നിവയിൽ ശ്രദ്ധ കേന്ദ്രീകരിച്ച് ആത്മവിശ്വാസവും അവതരണവും വളർത്തുന്നു.",
+    id: "dance",
+    title: "Dance",
+    teachers: [
+      {
+        id: "teacher-dance",
+        photoSuffix: "dance",
+        name: "Kalamandalam Saranya Arun",
+        role: "Mohiniyattam · Kerala Kalamandalam",
+        bio: "Mohiniyattam artist with a BA and MA from Kerala Kalamandalam and a Diamond Jubilee Fellowship scholar—coaching posture, abhinaya, and stage presence with depth and clarity.",
+      },
+    ],
   },
   {
-    id: "faculty-3",
-    name: "Instrumental faculty",
-    nameMl: "വാദ്യ അധ്യാപകൻ",
-    role: "Keyboard · Light music · Batches",
-    roleMl: "കീബോർഡ് · ലൈറ്റ് മ്യൂസിക് · ബാച്ചുകൾ",
-    bio: "Supports film-song learners and ensemble work with practical tips for practice at home or in class.",
-    bioMl:
-      "ഫിലിം ഗാന പഠിതാക്കൾക്കും ഗ്രൂപ്പ് പരിശീലനത്തിനും വീട്ടിലും ക്ലാസിലും ഉപയോഗിക്കാവുന്ന നുറുങ്ങുകൾ.",
+    id: "violin-eastern",
+    title: "Violin (Eastern)",
+    teachers: [
+      {
+        id: "teacher-violin-eastern",
+        photoSuffix: "violin_eastern",
+        name: "Sangeeth T S",
+        role: "Violin (Eastern) · Stage & Recording Artist",
+        bio: "Experienced eastern violinist supporting students with stage-ready technique, tone, and repertoire.",
+      },
+    ],
+  },
+  {
+    id: "violin-western",
+    title: "Violin (Western)",
+    teachers: [
+      {
+        id: "teacher-violin-western",
+        photoSuffix: "violin_western",
+        name: "Musthafa",
+        role: "Violin (Western) · Stage & Recording Artist",
+        bio: "Western violin faculty, bringing stage and recording experience into structured lessons for learners at every level.",
+      },
+    ],
+  },
+  {
+    id: "drawing",
+    title: "Drawing",
+    teachers: [
+      {
+        id: "teacher-drawing",
+        photoSuffix: "drawing",
+        name: "Amrutha M N",
+        role: "Drawing · Fine Arts, Thrissur",
+        bio: "Teaches drawing and visual fundamentals with a fine-arts background, helping students build observation, line, and composition with confidence.",
+      },
+    ],
   },
 ];

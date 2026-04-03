@@ -29,7 +29,7 @@ export const courses: Course[] = [
   {
     slug: "film-songs",
     title: "Film Songs",
-    titleMl: "ഫിലിം ഗാനങ്ങൾ",
+    titleMl: "ചലച്ചിത്ര ഗാനങ്ങൾ",
     description:
       "Learn beloved melodies with microphone technique, expression, and performance confidence.",
     descriptionMl:

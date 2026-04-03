@@ -1,6 +1,6 @@
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { site, siteUrls } from "@/lib/site";
-import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { Globe, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 
 type ContactInfoProps = {
   showMapPlaceholder?: boolean;
@@ -74,6 +74,22 @@ export function ContactInfo({
               className="mt-1 block break-all text-sm text-foreground underline-offset-4 hover:text-brand-red hover:underline sm:text-base"
             >
               {site.email}
+            </a>
+          </div>
+        </li>
+        <li className="flex gap-3">
+          <Globe className="mt-0.5 size-5 shrink-0 text-brand-red" aria-hidden />
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wide text-brand-orange">
+              Website
+            </p>
+            <a
+              href={siteUrls.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-1 block text-sm text-foreground underline-offset-4 hover:text-brand-red hover:underline sm:text-base"
+            >
+              {site.websiteDisplay}
             </a>
           </div>
         </li>

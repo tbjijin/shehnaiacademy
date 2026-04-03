@@ -2,6 +2,7 @@ import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { courses } from "@/lib/data/courses";
 import { site } from "@/lib/site";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Courses",
@@ -64,6 +65,12 @@ export default function CoursesPage() {
                   <dd>{c.mode}</dd>
                 </div>
               </dl>
+              <Link
+                href="/about#faculty"
+                className="mt-6 inline-flex text-sm font-semibold text-brand-red underline-offset-4 transition hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red focus-visible:ring-offset-2"
+              >
+                Our teachers
+              </Link>
             </SectionWrapper>
           </section>
         );

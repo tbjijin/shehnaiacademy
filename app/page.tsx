@@ -51,7 +51,7 @@ export default async function HomePage() {
 
       <section className="border-y border-black/[0.05] bg-white" aria-label="Upcoming events">
         <h2 className="sr-only">Upcoming events</h2>
-        <ImageMarquee images={newsMarquee} durationSec={38} />
+        <ImageMarquee images={newsMarquee} durationSec={38} size="large" />
       </section>
 
       <div id="courses" className="scroll-mt-28">
@@ -71,18 +71,31 @@ export default async function HomePage() {
               return (
                 <li key={c.slug}>
                   <article
-                    className={`flex h-full flex-col rounded-2xl border border-[color-mix(in_oklab,var(--brand-gold)_28%,transparent)] p-5 shadow-sm transition hover:shadow-md sm:p-6 ${card.bg} ${card.border} border-t-4`}
+                    className={`flex h-full flex-col overflow-hidden rounded-2xl border border-[color-mix(in_oklab,var(--brand-gold)_28%,transparent)] shadow-sm transition hover:shadow-md ${card.bg} ${card.border} border-t-4`}
                   >
-                    <h3 className="font-heading text-lg font-semibold text-foreground sm:text-xl">
-                      {c.title}
-                    </h3>
-                    <p className="mt-1 text-sm leading-snug text-neutral-600">{c.titleMl}</p>
                     <Link
                       href={`/courses#${c.slug}`}
-                      className="mt-auto inline-flex pt-5 text-sm font-semibold text-brand-red underline-offset-4 transition hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red focus-visible:ring-offset-2"
+                      className="flex flex-1 flex-col p-5 pb-4 text-left outline-none transition-colors hover:bg-black/[0.02] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-brand-red sm:p-6 sm:pb-5"
                     >
-                      Course details
+                      <h3 className="font-heading text-lg font-semibold text-foreground sm:text-xl">
+                        {c.title}
+                      </h3>
+                      <p className="mt-1 text-sm leading-snug text-neutral-600">{c.titleMl}</p>
                     </Link>
+                    <div className="mt-auto flex flex-row flex-wrap items-center gap-x-5 gap-y-2 border-t border-black/[0.04] px-5 py-4 sm:px-6 sm:py-5">
+                      <Link
+                        href={`/courses#${c.slug}`}
+                        className="inline-flex text-sm font-semibold text-brand-red underline-offset-4 transition hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red focus-visible:ring-offset-2"
+                      >
+                        Course details
+                      </Link>
+                      <Link
+                        href="/about#faculty"
+                        className="inline-flex text-sm font-semibold text-brand-red underline-offset-4 transition hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red focus-visible:ring-offset-2"
+                      >
+                        Our teachers
+                      </Link>
+                    </div>
                   </article>
                 </li>
               );
@@ -115,7 +128,12 @@ export default async function HomePage() {
 
       <section className="border-y border-black/[0.05] bg-neutral-50" aria-label="Achievements and moments">
         <h2 className="sr-only">Achievements and moments</h2>
-        <ImageMarquee images={achievementsMarquee} durationSec={48} reverse />
+        <ImageMarquee
+          images={achievementsMarquee}
+          durationSec={48}
+          reverse
+          size="large"
+        />
       </section>
 
       <ContactInfo showMapPlaceholder={false} />

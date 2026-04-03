@@ -16,6 +16,9 @@ export const site = {
   /** Country + number, no + (e.g. 91 + 10 digits for India) */
   phoneDigits: "919387066900",
   email: "shehnaianthikad@gmail.com",
+  /** Public site (display host without scheme) */
+  websiteDisplay: "www.shehnaiacademy.com",
+  websiteUrl: "https://www.shehnaiacademy.com",
   whatsappDisplay: "+91 9387066900",
   /** wa.me/{digits} */
   whatsappDigits: "919387066900",
@@ -26,4 +29,5 @@ export const siteUrls = {
   tel: `tel:${site.phoneDigits}`,
   mailto: `mailto:${site.email}`,
   whatsapp: `https://wa.me/${site.whatsappDigits}`,
+  website: site.websiteUrl,
 } as const;

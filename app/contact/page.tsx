@@ -21,7 +21,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <ContactInfo showMapPlaceholder id="details" />
+      <ContactInfo id="details" />
     </>
   );
 }

@@ -9,6 +9,10 @@ import { useCallback, useEffect, useState, type KeyboardEvent } from "react";
 const IMAGE_INTERVAL_MS = 3000;
 const COPY_INTERVAL_MS = 10_000;
 
+/** Reserved height for hero EN/ML copy — sized for Malayalam so toggling does not shift layout */
+const heroCopyMinHeights =
+  "min-h-[16rem] sm:min-h-[17rem] md:min-h-[19rem] lg:min-h-[20rem]";
+
 const heroCopySlides = [
   {
     headline: site.heroHeadline,
@@ -237,7 +241,7 @@ export function HomeHero({ heroImages }: { heroImages: readonly string[] }) {
       >
         <div className="mx-auto max-w-3xl text-center">
           <div
-            className="relative mx-auto min-h-[11.5rem] max-w-2xl sm:min-h-[10.75rem] md:min-h-[11rem]"
+            className={`relative mx-auto max-w-2xl ${heroCopyMinHeights}`}
             role="tabpanel"
             id="hero-copy-panel"
             aria-live={reduceMotion ? "off" : "polite"}
@@ -247,18 +251,18 @@ export function HomeHero({ heroImages }: { heroImages: readonly string[] }) {
                 key={slide.dotLabel}
                 className={`transition-opacity duration-500 ease-out motion-reduce:transition-none ${
                   i === copyIndex
-                    ? "relative z-[1] opacity-100"
-                    : "pointer-events-none absolute inset-0 z-0 opacity-0"
+                    ? `relative z-[1] flex ${heroCopyMinHeights} flex-col opacity-100`
+                    : "pointer-events-none absolute inset-0 z-0 flex min-h-full flex-col opacity-0"
                 }`}
                 aria-hidden={i !== copyIndex}
               >
                 <h2
                   id={copyIndex === i ? "hero-copy-heading" : undefined}
-                  className="min-h-[4.5rem] font-heading text-2xl font-semibold leading-tight text-neutral-900 sm:min-h-[4.25rem] sm:text-3xl md:min-h-[4.75rem] md:text-4xl"
+                  className="font-heading text-2xl font-semibold leading-tight text-neutral-900 sm:text-3xl md:text-4xl"
                 >
                   {slide.headline}
                 </h2>
-                <p className="mx-auto mt-3 min-h-[4.25rem] max-w-xl text-sm leading-relaxed text-neutral-600 sm:mt-4 sm:min-h-[3.75rem] sm:text-base md:min-h-[4rem] md:text-lg">
+                <p className="mx-auto mt-3 max-w-xl flex-1 text-sm leading-relaxed text-neutral-600 sm:mt-4 sm:text-base md:text-lg">
                   {slide.subline}
                 </p>
               </div>

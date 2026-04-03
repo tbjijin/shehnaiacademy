@@ -35,13 +35,10 @@ export function TeacherCard({ teacher }: { teacher: Teacher }) {
         <h3 className="font-heading text-lg font-semibold text-foreground sm:text-xl">
           {teacher.name}
         </h3>
-        <p className="mt-0.5 text-sm text-neutral-600 sm:text-base">{teacher.nameMl}</p>
         <p className="mt-3 text-xs font-medium uppercase tracking-wide text-brand-red sm:text-sm">
           {teacher.role}
         </p>
-        <p className="mt-1 text-xs text-neutral-600 sm:text-sm">{teacher.roleMl}</p>
         <p className="mt-4 text-sm leading-relaxed text-muted sm:text-base">{teacher.bio}</p>
-        <p className="mt-2 text-sm leading-relaxed text-muted sm:text-base">{teacher.bioMl}</p>
       </div>
     </article>
   );

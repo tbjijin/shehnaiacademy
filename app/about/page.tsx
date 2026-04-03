@@ -1,7 +1,8 @@
 import { TeacherCard } from "@/components/about/TeacherCard";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
-import { teachers } from "@/lib/data/teachers";
+import { teacherSections } from "@/lib/data/teachers";
 import { getPublicImageBuckets } from "@/lib/public-images";
+import { resolveTeacherPhotoUrl } from "@/lib/teacher-images";
 import { site } from "@/lib/site";
 import type { Metadata } from "next";
 
@@ -36,6 +37,26 @@ const teachingApproachItems = [
   },
 ] as const;
 
+function AboutSectionDivider() {
+  return (
+    <div
+      className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8"
+      role="separator"
+      aria-hidden
+    >
+      <div className="flex items-center gap-4 py-8 sm:py-10">
+        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[color-mix(in_oklab,var(--brand-gold)_45%,var(--brand-red)_12%)] to-transparent" />
+        <div className="flex shrink-0 items-center gap-1.5" aria-hidden>
+          <span className="size-1 rounded-full bg-brand-gold/90 shadow-[0_0_0_1px_color-mix(in_oklab,var(--brand-gold)_35%,transparent)]" />
+          <span className="h-0.5 w-6 rounded-full bg-gradient-to-r from-brand-red/35 via-brand-gold to-brand-orange/50" />
+          <span className="size-1 rounded-full bg-brand-orange/85 shadow-[0_0_0_1px_color-mix(in_oklab,var(--brand-orange)_30%,transparent)]" />
+        </div>
+        <div className="h-px flex-1 bg-gradient-to-l from-transparent via-[color-mix(in_oklab,var(--brand-gold)_45%,var(--brand-red)_12%)] to-transparent" />
+      </div>
+    </div>
+  );
+}
+
 export const metadata: Metadata = {
   title: "About",
   description: `Learn about ${site.name}, our faculty, and our mission since ${site.established}.`,
@@ -43,10 +64,13 @@ export const metadata: Metadata = {
 
 export default async function AboutPage() {
   const { teachers: teacherUrls } = getPublicImageBuckets();
-  const teachersResolved = teachers.map((t, i) => ({
-    ...t,
-    image: t.image ?? teacherUrls[i],
-  }));
+
+  function withResolvedImage<T extends { image?: string; photoSuffix: string }>(t: T) {
+    return {
+      ...t,
+      image: t.image ?? resolveTeacherPhotoUrl(teacherUrls, t.photoSuffix),
+    };
+  }
 
   return (
     <>
@@ -74,9 +98,11 @@ export default async function AboutPage() {
         </div>
       </SectionWrapper>
 
+      <AboutSectionDivider />
+
       <SectionWrapper
         id="faculty"
-        className="bg-[color-mix(in_oklab,white_72%,var(--brand-cream))]"
+        className="scroll-mt-28 bg-[color-mix(in_oklab,white_72%,var(--brand-cream))]"
       >
         <div className="max-w-3xl">
           <h2 className="font-heading text-2xl font-semibold text-foreground sm:text-3xl">
@@ -92,14 +118,26 @@ export default async function AboutPage() {
             ഉറപ്പുനൽകുന്നു.
           </p>
         </div>
-        <ul className="mt-10 grid list-none gap-8 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3 lg:gap-10">
-          {teachersResolved.map((t) => (
-            <li key={t.id}>
-              <TeacherCard teacher={t} />
-            </li>
-          ))}
+        <ul className="mt-10 grid list-none grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3 lg:gap-10">
+          {teacherSections.flatMap((section) =>
+            section.teachers.map((t) => (
+              <li key={t.id} className="flex min-w-0 flex-col">
+                <h3
+                  id={`faculty-${t.id}`}
+                  className="font-heading text-lg font-semibold text-foreground sm:text-xl"
+                >
+                  {section.title}
+                </h3>
+                <div className="mt-3 min-w-0 flex-1">
+                  <TeacherCard teacher={withResolvedImage(t)} />
+                </div>
+              </li>
+            )),
+          )}
         </ul>
       </SectionWrapper>
+
+      <AboutSectionDivider />
 
       <SectionWrapper>
         <div className="grid gap-8 md:grid-cols-2 md:gap-10">
@@ -134,6 +172,8 @@ export default async function AboutPage() {
         </div>
       </SectionWrapper>
 
+      <AboutSectionDivider />
+
       <SectionWrapper className="bg-[color-mix(in_oklab,white_72%,var(--brand-cream))]">
         <h2 className="font-heading text-2xl font-semibold text-foreground sm:text-3xl">
           Teaching approach / പഠനരീതി
@@ -150,6 +190,8 @@ export default async function AboutPage() {
           ))}
         </ol>
       </SectionWrapper>
+
+      <AboutSectionDivider />
     </>
   );
 }
