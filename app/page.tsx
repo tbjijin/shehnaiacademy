@@ -4,7 +4,7 @@ import { ImageMarquee } from "@/components/sections/ImageMarquee";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { courses } from "@/lib/data/courses";
 import { whyUsItems } from "@/lib/data/why-us";
-import { getPublicImageBuckets } from "@/lib/public-images";
+import { getPublicImageBuckets, orderHeroImageUrls } from "@/lib/public-images";
 import {
   fallbackAchievementsMarquee,
   fallbackHeroSlides,
@@ -34,8 +34,9 @@ const courseCardStyles = [
 
 export default async function HomePage() {
   const buckets = getPublicImageBuckets();
-  const heroImages =
-    buckets.hero.length > 0 ? buckets.hero : [...fallbackHeroSlides];
+  const heroImages = orderHeroImageUrls(
+    buckets.hero.length > 0 ? buckets.hero : [...fallbackHeroSlides],
+  );
   const newsMarquee =
     buckets.news.length > 0 ? buckets.news : [...fallbackNewsMarquee];
   const achievementsMarquee =
@@ -133,6 +134,7 @@ export default async function HomePage() {
           durationSec={48}
           reverse
           size="large"
+          achievementCaptions
         />
       </section>
 

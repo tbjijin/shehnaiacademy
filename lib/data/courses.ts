@@ -23,7 +23,7 @@ export const courses: Course[] = [
     descriptionMl:
       "രാഗം, താളം, ക്ലാസിക്കൽ കൃതികൾ എന്നിവയിൽ ഘടനാബദ്ധമായ പരിശീലനം നൽകി സ്ഥിരമായ പുരോഗതി ഉറപ്പാക്കുന്നു.",
     duration: "Flexible batches",
-    mode: "Online & Offline",
+    mode: "Online & In person",
     image: rotate(0),
   },
   {
@@ -35,7 +35,7 @@ export const courses: Course[] = [
     descriptionMl:
       "മൈക്ക് ടെക്നിക്കും അവതരണശൈലിയുമായി പ്രിയപ്പെട്ട ഗാനങ്ങൾ ആത്മവിശ്വാസത്തോടെ പഠിക്കാം.",
     duration: "Flexible batches",
-    mode: "Online & Offline",
+    mode: "Online & In person",
     image: rotate(1),
   },
   {
@@ -47,7 +47,7 @@ export const courses: Course[] = [
     descriptionMl:
       "ഫിംഗർ പ്ലേസ്മെന്റ്, റിധം, ആകൂസ്റ്റിക്/ലൈറ്റ് മ്യൂസിക് പാട്ടുകൾ വായിക്കുന്ന കഴിവുകൾ പരിശീലിപ്പിക്കുന്നു.",
     duration: "Flexible batches",
-    mode: "Online & Offline",
+    mode: "In person",
     image: rotate(2),
   },
   {
@@ -59,7 +59,7 @@ export const courses: Course[] = [
     descriptionMl:
       "ബോ കണ്ട്രോൾ, സ്വരശുദ്ധി, കർണാടകവും വെസ്റ്റേണും ഉൾക്കുന്ന പാഠഭാഗങ്ങൾ ക്രമമായി പഠിപ്പിക്കുന്നു.",
     duration: "Flexible batches",
-    mode: "Online & Offline",
+    mode: "In person",
     image: rotate(3),
   },
   {
@@ -71,7 +71,7 @@ export const courses: Course[] = [
     descriptionMl:
       "വോക്കൽ, ഇൻസ്ട്രുമെന്റൽ പ്രകടനങ്ങൾക്ക് ആവശ്യമായ താള പാറ്റേണുകളും അനുബന്ധ പരിശീലനവും നൽകുന്നു.",
     duration: "Flexible batches",
-    mode: "Online & Offline",
+    mode: "In person",
     image: rotate(4),
   },
   {
@@ -83,7 +83,7 @@ export const courses: Course[] = [
     descriptionMl:
       "ആധുനിക ഡ്രമ്മിംഗിനുള്ള ഗ്രൂവ്, കോ-ഓർഡിനേഷൻ, ശൈലീബോധം എന്നിവയിൽ പരിശീലനം.",
     duration: "Flexible batches",
-    mode: "Online & Offline",
+    mode: "In person",
     image: rotate(0),
   },
   {
@@ -95,7 +95,7 @@ export const courses: Course[] = [
     descriptionMl:
       "ക്ലാസിക്കൽ അടിസ്ഥാനങ്ങളിൽ നിന്ന് ലൈറ്റ് മ്യൂസിക് വരെയുള്ള കോർഡുകൾ, സ്കെയിലുകൾ, അവതരണ ഭാഗങ്ങൾ പഠിപ്പിക്കുന്നു.",
     duration: "Flexible batches",
-    mode: "Online & Offline",
+    mode: "In person",
     image: rotate(1),
   },
   {
@@ -107,7 +107,7 @@ export const courses: Course[] = [
     descriptionMl:
       "അടിസ്ഥാന നിലപാട്, അടവുകൾ, മുഖാഭിനയവും ചലനഭാവവും ഉൾപ്പെടുത്തി നൃത്തപരിശീലനം.",
     duration: "Flexible batches",
-    mode: "Online & Offline",
+    mode: "In person",
     image: rotate(2),
   },
   {
@@ -119,7 +119,7 @@ export const courses: Course[] = [
     descriptionMl:
       "നിരീക്ഷണം, ഷേഡിംഗ്, കോംപോസിഷൻ എന്നിവയിൽ പരിശീലനം നൽകി സൃഷ്ടിശേഷി വളർത്തുന്നു.",
     duration: "Flexible batches",
-    mode: "Online & Offline",
+    mode: "In person",
     image: rotate(3),
   },
 ];

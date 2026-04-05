@@ -11,7 +11,8 @@ export const site = {
   heroSublineMl:
     "അനുഭവസമ്പന്നരായ അധ്യാപകർ നയിക്കുന്ന ലൈവ് & ഓൺലൈൻ ക്ലാസുകൾ. അക്കാദമിയിലോ വീട്ടിലിരുന്നോ ഇനി നിങ്ങളുടെ സൗകര്യത്തിനനുസരിച്ച് പരിശീലിക്കാം. കൂടാതെ, കുട്ടികൾക്കായി പ്രത്യേക അവധിക്കാല ക്ലാസുകളും (Vacation Classes) ഒരുക്കുന്നു.",
   location: "Kanjani, Anthikad",
-  modeLabel: "Online & Offline Classes",
+  modeLabel:
+    "Carnatic & film songs online & in person · Other programmes on campus",
   phone: "+91 9387066900",
   /** Country + number, no + (e.g. 91 + 10 digits for India) */
   phoneDigits: "919387066900",
