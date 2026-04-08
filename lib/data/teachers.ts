@@ -28,7 +28,7 @@ export const teacherSections: TeacherSection[] = [
         photoSuffix: "music",
         name: "Bineesh Krishnan",
         role: "Vocal · Higher Grade in South Indian Music, Madras",
-        bio: "With over 20 years of expertise, guiding students in Classical vocal training. Focuses on building a strong foundation through structured, graded lessons while developing students' performance skills and confidence.",
+        bio: "With over 25 years of expertise, guiding students in Classical vocal training. Focuses on building a strong foundation through structured, graded lessons while developing students' performance skills and confidence.",
       },
     ],
   },
