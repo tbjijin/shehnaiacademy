@@ -35,7 +35,14 @@ export function TeacherCard({ teacher }: { teacher: Teacher }) {
         <h3 className="font-heading text-lg font-semibold text-foreground sm:text-xl">
           {teacher.name}
         </h3>
-        <p className="mt-3 text-xs font-medium uppercase tracking-wide text-brand-red sm:text-sm">
+        {teacher.byline ? (
+          <p className="mt-1.5 text-sm font-medium text-neutral-700 sm:text-base">
+            {teacher.byline}
+          </p>
+        ) : null}
+        <p
+          className={`text-xs font-medium uppercase tracking-wide text-brand-red sm:text-sm ${teacher.byline ? "mt-2" : "mt-3"}`}
+        >
           {teacher.role}
         </p>
         <p className="mt-4 text-sm leading-relaxed text-muted sm:text-base">{teacher.bio}</p>

@@ -1,3 +1,5 @@
+import { site } from "@/lib/site";
+
 export type Teacher = {
   id: string;
   /**
@@ -6,6 +8,8 @@ export type Teacher = {
    */
   photoSuffix: string;
   name: string;
+  /** Optional line under the name (e.g. leadership title). */
+  byline?: string;
   role: string;
   bio: string;
   /** Optional explicit path under `public`; overrides suffix matching when set. */
@@ -27,6 +31,7 @@ export const teacherSections: TeacherSection[] = [
         id: "teacher-music-vocal",
         photoSuffix: "music",
         name: "Bineesh Krishnan",
+        byline: `Director, ${site.name}`,
         role: "Vocal · Higher Grade in South Indian Music, Madras",
         bio: "With over 25 years of expertise, guiding students in Classical vocal training. Focuses on building a strong foundation through structured, graded lessons while developing students' performance skills and confidence.",
       },
