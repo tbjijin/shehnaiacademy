@@ -46,6 +46,32 @@ export const teacherSections: TeacherSection[] = [
     ],
   },
   {
+    id: "drawing",
+    title: "Drawing",
+    teachers: [
+      {
+        id: "teacher-drawing",
+        photoSuffix: "drawing",
+        name: "Amrutha M N",
+        role: "Drawing · Fine Arts, Thrissur",
+        bio: "Teaches drawing and visual fundamentals with a fine-arts background, helping students build observation, line, and composition with confidence.",
+      },
+    ],
+  },
+  {
+    id: "guitar",
+    title: "Guitar",
+    teachers: [
+      {
+        id: "teacher-guitar",
+        photoSuffix: "Guitar",
+        name: "Latheef Chavakkad",
+        role: "Guitar · Stage & Recording Artist",
+        bio: "A seasoned stage and recording guitarist with more than four decades of experience, helping learners build solid technique, timing, and musicality across acoustic and contemporary styles.",
+      },
+    ],
+  },
+  {
     id: "violin-eastern",
     title: "Violin (Eastern)",
     teachers: [
@@ -81,32 +107,6 @@ export const teacherSections: TeacherSection[] = [
         name: "Naduvil Unnikrishnan",
         role: "Jazz Drums · Stage & Recording Artist",
         bio: "A professional stage and recording artist with over forty years of experience, bringing real-world groove, ensemble sense, and stylistic depth to the drum chair—guiding students from fundamentals to confident performance.",
-      },
-    ],
-  },
-  {
-    id: "guitar",
-    title: "Guitar",
-    teachers: [
-      {
-        id: "teacher-guitar",
-        photoSuffix: "Guitar",
-        name: "Latheef Chavakkad",
-        role: "Guitar · Stage & Recording Artist",
-        bio: "A seasoned stage and recording guitarist with more than four decades of experience, helping learners build solid technique, timing, and musicality across acoustic and contemporary styles.",
-      },
-    ],
-  },
-  {
-    id: "drawing",
-    title: "Drawing",
-    teachers: [
-      {
-        id: "teacher-drawing",
-        photoSuffix: "drawing",
-        name: "Amrutha M N",
-        role: "Drawing · Fine Arts, Thrissur",
-        bio: "Teaches drawing and visual fundamentals with a fine-arts background, helping students build observation, line, and composition with confidence.",
       },
     ],
   },
