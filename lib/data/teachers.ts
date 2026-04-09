@@ -64,28 +64,15 @@ export const teacherSections: TeacherSection[] = [
     ],
   },
   {
-    id: "guitar",
-    title: "Guitar",
+    id: "keyboard",
+    title: "Keyboard",
     teachers: [
       {
-        id: "teacher-guitar",
-        photoSuffix: "Guitar",
-        name: "Latheef Chavakkad",
-        role: "Guitar · Stage & Recording Artist",
-        bio: "A seasoned stage and recording guitarist with more than four decades of experience, helping learners build solid technique, timing, and musicality across acoustic and contemporary styles.",
-      },
-    ],
-  },
-  {
-    id: "violin-eastern",
-    title: "Violin (Eastern)",
-    teachers: [
-      {
-        id: "teacher-violin-eastern",
-        photoSuffix: "violin_eastern",
-        name: "Sangeeth T S",
-        role: "Violin (Eastern) · Stage & Recording Artist",
-        bio: "Experienced eastern violinist supporting students with stage-ready technique, tone, and repertoire.",
+        id: "teacher-keyboard",
+        photoSuffix: "Keyboard",
+        name: "Simon Nellikunnu",
+        role: "Keyboard · Stage & Recording Artist",
+        bio: "A professional stage and recording keyboardist with over forty years of experience, guiding students through chords, accompaniment, and performance-ready playing from classical foundations to light music.",
       },
     ],
   },
@@ -99,6 +86,32 @@ export const teacherSections: TeacherSection[] = [
         name: "Musthafa",
         role: "Violin (Western) · Stage & Recording Artist",
         bio: "Western violin faculty, bringing stage and recording experience into structured lessons for learners at every level.",
+      },
+    ],
+  },
+  {
+    id: "violin-carnatic",
+    title: "Violin (Carnatic)",
+    teachers: [
+      {
+        id: "teacher-violin-eastern",
+        photoSuffix: "violin_eastern",
+        name: "Sangeeth T S",
+        role: "Violin (Carnatic) · Stage & Recording Artist",
+        bio: "Experienced Carnatic violinist supporting students with stage-ready technique, tone, and repertoire.",
+      },
+    ],
+  },
+  {
+    id: "guitar",
+    title: "Guitar",
+    teachers: [
+      {
+        id: "teacher-guitar",
+        photoSuffix: "Guitar",
+        name: "Latheef Chavakkad",
+        role: "Guitar · Stage & Recording Artist",
+        bio: "A seasoned stage and recording guitarist with more than four decades of experience, helping learners build solid technique, timing, and musicality across acoustic and contemporary styles.",
       },
     ],
   },

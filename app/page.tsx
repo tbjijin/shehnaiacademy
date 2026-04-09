@@ -34,9 +34,12 @@ const courseCardStyles = [
 
 export default async function HomePage() {
   const buckets = getPublicImageBuckets();
-  const heroImages = orderHeroImageUrls(
+  const orderedHeroImages = orderHeroImageUrls(
     buckets.hero.length > 0 ? buckets.hero : [...fallbackHeroSlides],
   );
+  const heroImages = buckets.logoSrc
+    ? [buckets.logoSrc, ...orderedHeroImages.filter((src) => src !== buckets.logoSrc)]
+    : orderedHeroImages;
   const newsMarquee =
     buckets.news.length > 0 ? buckets.news : [...fallbackNewsMarquee];
   const achievementsMarquee =

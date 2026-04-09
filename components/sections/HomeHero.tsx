@@ -51,7 +51,7 @@ function DesktopPhotoReel({
           fill
           quality={90}
           sizes="25vw"
-          className="object-cover object-right-top"
+          className={heroImageClass(prevSrc, "object-cover object-right-top")}
           draggable={false}
         />
         <div
@@ -70,7 +70,7 @@ function DesktopPhotoReel({
             priority={index === 0}
             quality={90}
             sizes="25vw"
-            className="object-cover object-top"
+            className={heroImageClass(currSrc, "object-cover object-top")}
             draggable={false}
           />
         </div>
@@ -84,7 +84,7 @@ function DesktopPhotoReel({
           fill
           quality={90}
           sizes="25vw"
-          className="object-cover object-left-top"
+          className={heroImageClass(nextSrc, "object-cover object-left-top")}
           draggable={false}
         />
         <div
@@ -98,6 +98,15 @@ function DesktopPhotoReel({
 
 const edgeArrowBtnClass =
   "pointer-events-auto inline-flex size-11 items-center justify-center rounded-full border border-white/25 bg-neutral-900/35 text-white shadow-md backdrop-blur-md transition hover:bg-neutral-900/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent disabled:pointer-events-none disabled:opacity-40";
+
+function isLogoSlide(src: string): boolean {
+  return src.includes("/images/logo/");
+}
+
+function heroImageClass(src: string, normalClass: string): string {
+  if (isLogoSlide(src)) return "object-contain object-center p-2";
+  return normalClass;
+}
 
 export function HomeHero({ heroImages }: { heroImages: readonly string[] }) {
   const [index, setIndex] = useState(0);
@@ -183,7 +192,7 @@ export function HomeHero({ heroImages }: { heroImages: readonly string[] }) {
                   priority={i === 0}
                   quality={90}
                   sizes="100vw"
-                  className="object-cover object-top"
+                  className={heroImageClass(src, "object-cover object-top")}
                   draggable={false}
                 />
               </div>
