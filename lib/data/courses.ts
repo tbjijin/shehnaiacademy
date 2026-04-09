@@ -39,6 +39,30 @@ export const courses: Course[] = [
     image: rotate(1),
   },
   {
+    slug: "dance",
+    title: "Dance",
+    titleMl: "നൃത്തം",
+    description:
+      "Foundational posture, adavus, and expressive storytelling through movement.",
+    descriptionMl:
+      "അടിസ്ഥാന നിലപാട്, അടവുകൾ, മുഖാഭിനയവും ചലനഭാവവും ഉൾപ്പെടുത്തി നൃത്തപരിശീലനം.",
+    duration: "Flexible batches",
+    mode: "In person",
+    image: rotate(2),
+  },
+  {
+    slug: "drawing",
+    title: "Drawing",
+    titleMl: "ഡ്രോയിംഗ്",
+    description:
+      "Observation, shading, and composition for creative confidence across mediums.",
+    descriptionMl:
+      "നിരീക്ഷണം, ഷേഡിംഗ്, കോംപോസിഷൻ എന്നിവയിൽ പരിശീലനം നൽകി സൃഷ്ടിശേഷി വളർത്തുന്നു.",
+    duration: "Flexible batches",
+    mode: "In person",
+    image: rotate(3),
+  },
+  {
     slug: "guitar",
     title: "Guitar",
     titleMl: "ഗിറ്റാർ",
@@ -63,16 +87,16 @@ export const courses: Course[] = [
     image: rotate(3),
   },
   {
-    slug: "thabala",
-    title: "Thabala",
-    titleMl: "തബല",
+    slug: "keyboard",
+    title: "Keyboard",
+    titleMl: "കീബോർഡ്",
     description:
-      "Rhythm patterns and accompaniment skills to support vocal and instrumental performance.",
+      "Chords, scales, and performance pieces from classical basics to light music.",
     descriptionMl:
-      "വോക്കൽ, ഇൻസ്ട്രുമെന്റൽ പ്രകടനങ്ങൾക്ക് ആവശ്യമായ താള പാറ്റേണുകളും അനുബന്ധ പരിശീലനവും നൽകുന്നു.",
+      "ക്ലാസിക്കൽ അടിസ്ഥാനങ്ങളിൽ നിന്ന് ലൈറ്റ് മ്യൂസിക് വരെയുള്ള കോർഡുകൾ, സ്കെയിലുകൾ, അവതരണ ഭാഗങ്ങൾ പഠിപ്പിക്കുന്നു.",
     duration: "Flexible batches",
     mode: "In person",
-    image: rotate(4),
+    image: rotate(1),
   },
   {
     slug: "jazz-drum",
@@ -87,39 +111,15 @@ export const courses: Course[] = [
     image: rotate(0),
   },
   {
-    slug: "keyboard",
-    title: "Keyboard",
-    titleMl: "കീബോർഡ്",
+    slug: "thabala",
+    title: "Thabala",
+    titleMl: "തബല",
     description:
-      "Chords, scales, and performance pieces from classical basics to light music.",
+      "Rhythm patterns and accompaniment skills to support vocal and instrumental performance.",
     descriptionMl:
-      "ക്ലാസിക്കൽ അടിസ്ഥാനങ്ങളിൽ നിന്ന് ലൈറ്റ് മ്യൂസിക് വരെയുള്ള കോർഡുകൾ, സ്കെയിലുകൾ, അവതരണ ഭാഗങ്ങൾ പഠിപ്പിക്കുന്നു.",
+      "വോക്കൽ, ഇൻസ്ട്രുമെന്റൽ പ്രകടനങ്ങൾക്ക് ആവശ്യമായ താള പാറ്റേണുകളും അനുബന്ധ പരിശീലനവും നൽകുന്നു.",
     duration: "Flexible batches",
     mode: "In person",
-    image: rotate(1),
-  },
-  {
-    slug: "dance",
-    title: "Dance",
-    titleMl: "നൃത്തം",
-    description:
-      "Foundational posture, adavus, and expressive storytelling through movement.",
-    descriptionMl:
-      "അടിസ്ഥാന നിലപാട്, അടവുകൾ, മുഖാഭിനയവും ചലനഭാവവും ഉൾപ്പെടുത്തി നൃത്തപരിശീലനം.",
-    duration: "Flexible batches",
-    mode: "In person",
-    image: rotate(2),
-  },
-  {
-    slug: "drawing",
-    title: "Drawing",
-    titleMl: "ഡ്രോയിംഗ്",
-    description:
-      "Observation, shading, and composition for creative confidence across mediums.",
-    descriptionMl:
-      "നിരീക്ഷണം, ഷേഡിംഗ്, കോംപോസിഷൻ എന്നിവയിൽ പരിശീലനം നൽകി സൃഷ്ടിശേഷി വളർത്തുന്നു.",
-    duration: "Flexible batches",
-    mode: "In person",
-    image: rotate(3),
+    image: rotate(4),
   },
 ];
