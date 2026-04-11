@@ -85,15 +85,45 @@ export default async function AboutPage() {
       <SectionWrapper>
         <div className="max-w-3xl">
           <p className="text-base leading-relaxed text-muted sm:text-lg">
-            {site.name} was established in {site.established} with the aim of promoting
-            music and arts education. We offer structured training in various disciplines
-            for students of all age groups.
+            {site.name} began its journey in 2002, born from a deep-rooted love for our cultural
+            heritage. The academy was founded with the traditional lighting of the lamp by our
+            beloved grandmother,{" "}
+            <strong className="font-semibold text-foreground">Sreemathi Ammini Engandiyur</strong>
+            , wife of the legendary musician{" "}
+            <strong className="font-semibold text-foreground">
+              Engandiyur Krishnankutty Aasan (Manappuram Ponnu)
+            </strong>
+            .
           </p>
           <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">
-            2002 മുതൽ സംഗീതത്തിന്റെയും കലയുടെയും ലോകത്ത് സജീവമായ സാന്നിധ്യമാണ്
-            &apos;ഷെഹ്നായ് സ്കൂൾ ഓഫ് മ്യൂസിക് ആൻഡ് ആർട്ട്&apos;. കൊച്ചുകുട്ടികൾ മുതൽ
-            മുതിർന്നവർ വരെ ഏതു പ്രായത്തിലുള്ളവർക്കും താല്പര്യമുള്ള വിഷയങ്ങളിൽ ശാസ്ത്രീയമായ
-            പരിശീലനം ഇവിടെ ലഭിക്കുന്നു.
+            With the blessings of our mentor,{" "}
+            <strong className="font-semibold text-foreground">
+              Sri. Chandrasekharan Nair (Kattoor House, Karamukku)
+            </strong>
+            , and the unwavering support of our dear ones, we set out to promote music and arts
+            education. Today, we carry forward this legacy by offering structured training in
+            various disciplines for learners of all age groups, keeping the arts alive in every
+            heart.
+          </p>
+          <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">
+            2002-ലാണ് &apos;ഷെഹ്നായ് സ്കൂൾ ഓഫ് മ്യൂസിക് ആൻഡ് ആർട്സ്&apos; സംഗീത-കലാ
+            പഠനത്തിനായി പ്രവർത്തനം ആരംഭിച്ചത്. പ്രശസ്ത സംഗീതജ്ഞൻ{" "}
+            <strong className="font-semibold text-foreground">
+              എങ്ങണ്ടിയൂർ കൃഷ്ണൻകുട്ടി ആശാന്റെ (മണപ്പുറം പൊന്നു)
+            </strong>{" "}
+            ധർമ്മപത്നിയും ഞങ്ങളുടെ പ്രിയപ്പെട്ട മുത്തശ്ശിയുമായ{" "}
+            <strong className="font-semibold text-foreground">ശ്രീമതി അമ്മിണി എങ്ങണ്ടിയൂർ</strong>{" "}
+            തെളിച്ച ഭദ്രദീപത്തിൽ നിന്നാണ് ഈ കലാകുടുംബത്തിന്റെ തുടക്കം.
+          </p>
+          <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">
+            ഞങ്ങളുടെ ഗുരുതുല്യനായ{" "}
+            <strong className="font-semibold text-foreground">
+              ശ്രീ. ചന്ദ്രശേഖരൻ നായരുടെയും (കാട്ടൂർ ഹൗസ്, കാരമുക്ക്)
+            </strong>{" "}
+            പ്രിയപ്പെട്ടവരുടെയും നിറഞ്ഞ അനുഗ്രഹത്തോടും പ്രാർത്ഥനയോടും കൂടിയാണ് ഞങ്ങൾ ഈ യാത്ര
+            തുടങ്ങിയത്. ആ ദീപം ഇന്നും ഒട്ടും മങ്ങാതെ ഓരോ വിദ്യാർത്ഥിയിലും പടരുന്നു. ഏതു
+            പ്രായത്തിലുള്ളവർക്കും കലകളുടെ ലോകത്തേക്ക് ആത്മവിശ്വാസത്തോടെ കടന്നുവരാൻ ഒരു
+            വേദിയൊരുക്കുക എന്നതാണ് ഞങ്ങളുടെ ലക്ഷ്യം.
           </p>
         </div>
       </SectionWrapper>

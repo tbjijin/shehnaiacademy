@@ -8,6 +8,9 @@ export const FALLBACK_LOGO_SRC = "/images/logo/Shehnai_School_of_Music_logo.jpg"
 export const logoSrc = FALLBACK_LOGO_SRC;
 
 export const fallbackHeroSlides = [
+  "/images/hero/1_Ammama-inaguration.jpg",
+  "/images/hero/2_Mash-inaguration.jpg",
+  "/images/hero/3_Amma-inaguratoin.jpeg",
   "/images/hero/3_hero-bineeshAmma-singing.jpeg",
   "/images/hero/4_hero-art-class.jpeg",
   "/images/hero/5_hero-onlineclass.jpg",
@@ -27,7 +30,7 @@ export const fallbackNewsMarquee = [
 ] as const;
 
 export const fallbackAchievementsMarquee = [
-  "/images/achieve/news-shehnai-inagruationday.jpeg",
+  "/images/achieve/student-prize-inaguralday.jpg",
   "/images/achieve/devapriya+balasree+saranam_Ayyappa.jpg",
   "/images/achieve/Krishnapriya_K_B+A_Grade+CarnaticMusic+58th_State_School_Fest.jpg",
   "/images/achieve/Sriya_Sreekanth+_+Flowers_Top_Singer+Season4.jpg",
