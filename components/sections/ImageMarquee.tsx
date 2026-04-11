@@ -2,7 +2,7 @@
 
 import { parseAchievementCaptionFromUrl } from "@/lib/achievement-caption";
 import Image from "next/image";
-import { useMemo } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 const slideSizes = {
   default:
@@ -30,6 +30,12 @@ const imageSizes = {
   default: "(max-width: 768px) 176px, 240px",
   large: "(max-width: 768px) 264px, 360px",
 } as const;
+
+/** Hide scrollbar but keep touch / trackpad / drag scroll */
+const scrollHideClass =
+  "[scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden";
+
+const USER_PAUSE_MS = 2800;
 
 type ImageMarqueeProps = {
   images: readonly string[];
@@ -61,63 +67,242 @@ export function ImageMarquee({
   const outerClass = captionSlideOuter[size];
   const imageBoxClass = captionSlideImage[size];
 
-  return (
-    <div className={`overflow-hidden bg-neutral-900/5 ${paddingClass}`}>
-      <div
-        className={`marquee-track flex w-max ${gapClass} items-start`}
-        style={{
-          animation: `${reverse ? "marquee-scroll-reverse" : "marquee-scroll"} ${durationSec}s linear infinite`,
-        }}
-      >
-        {loop.map((src, i) => {
-          const caption = achievementCaptions
-            ? parseAchievementCaptionFromUrl(src)
-            : null;
-          const alt =
-            caption != null
-              ? [caption.line1, caption.line2].filter(Boolean).join(" · ")
-              : "";
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const programmaticScrollRef = useRef(false);
+  const userPauseUntilRef = useRef(0);
+  const lastTickRef = useRef<number | null>(null);
+  const [reduceMotion, setReduceMotion] = useState(false);
+  const dragRef = useRef<{ pointerId: number; startX: number; startScroll: number } | null>(
+    null,
+  );
 
-          if (achievementCaptions) {
-            return (
-              <div key={`${src}-${i}`} className={outerClass}>
-                <div className={`${imageBoxClass} bg-neutral-200/40`}>
-                  <Image
-                    src={src}
-                    alt={alt}
-                    fill
-                    sizes={imageSizes[size]}
-                    quality={88}
-                    className="object-cover object-center"
-                    draggable={false}
-                  />
-                </div>
-                {caption != null ? (
-                  <div className="max-w-full px-0.5 pt-2 text-center text-[0.65rem] uppercase leading-snug tracking-wide text-neutral-700 sm:text-[0.7rem] md:text-xs">
-                    <p className="font-medium text-neutral-800">{caption.line1}</p>
-                    {caption.line2 ? (
-                      <p className="mt-0.5 text-neutral-600">{caption.line2}</p>
-                    ) : null}
-                  </div>
-                ) : null}
-              </div>
-            );
-          }
+  const scheduleUserPause = useCallback(() => {
+    userPauseUntilRef.current = performance.now() + USER_PAUSE_MS;
+  }, []);
 
-          return (
-            <div key={`${src}-${i}`} className={slideClass}>
-              <Image
-                src={src}
-                alt=""
-                fill
-                sizes={imageSizes[size]}
-                quality={88}
-                className="object-cover object-center"
-                draggable={false}
-              />
+  const setScrollLeftProgrammatic = useCallback((left: number) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    programmaticScrollRef.current = true;
+    el.scrollLeft = left;
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        programmaticScrollRef.current = false;
+      });
+    });
+  }, []);
+
+  const normalizeScroll = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const half = el.scrollWidth / 2;
+    if (half <= 1) return;
+    let sl = el.scrollLeft;
+    let changed = false;
+    while (sl >= half) {
+      sl -= half;
+      changed = true;
+    }
+    while (sl < 0) {
+      sl += half;
+      changed = true;
+    }
+    if (changed) setScrollLeftProgrammatic(sl);
+  }, [setScrollLeftProgrammatic]);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const apply = () => setReduceMotion(mq.matches);
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
+  }, []);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(() => normalizeScroll());
+    ro.observe(el);
+    normalizeScroll();
+    return () => ro.disconnect();
+  }, [normalizeScroll, loop.length]);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el || loop.length === 0 || reduceMotion) return;
+
+    let raf = 0;
+    const tick = (now: number) => {
+      const c = scrollRef.current;
+      if (!c) {
+        raf = requestAnimationFrame(tick);
+        return;
+      }
+      const half = c.scrollWidth / 2;
+      if (half <= 1) {
+        lastTickRef.current = now;
+        raf = requestAnimationFrame(tick);
+        return;
+      }
+
+      const pausedByUser = performance.now() < userPauseUntilRef.current;
+      const dragging = dragRef.current != null;
+
+      if (!pausedByUser && !dragging && !reduceMotion) {
+        const last = lastTickRef.current ?? now;
+        const dt = Math.min(now - last, 64);
+        lastTickRef.current = now;
+        const pxPerMs = half / (durationSec * 1000);
+        let sl = c.scrollLeft;
+        if (reverse) sl -= pxPerMs * dt;
+        else sl += pxPerMs * dt;
+        while (sl >= half) sl -= half;
+        while (sl < 0) sl += half;
+        setScrollLeftProgrammatic(sl);
+      } else {
+        lastTickRef.current = now;
+      }
+      raf = requestAnimationFrame(tick);
+    };
+
+    lastTickRef.current = null;
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [durationSec, reverse, reduceMotion, loop.length, setScrollLeftProgrammatic]);
+
+  const onScroll = useCallback(() => {
+    if (programmaticScrollRef.current) return;
+    scheduleUserPause();
+    normalizeScroll();
+  }, [normalizeScroll, scheduleUserPause]);
+
+  const onWheel = useCallback(
+    (e: React.WheelEvent) => {
+      if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+      e.preventDefault();
+      const el = scrollRef.current;
+      if (!el) return;
+      el.scrollLeft += e.deltaX;
+      scheduleUserPause();
+      normalizeScroll();
+    },
+    [normalizeScroll, scheduleUserPause],
+  );
+
+  const onPointerDown = useCallback((e: React.PointerEvent) => {
+    if (e.button !== 0) return;
+    const el = scrollRef.current;
+    if (!el) return;
+    el.setPointerCapture(e.pointerId);
+    dragRef.current = {
+      pointerId: e.pointerId,
+      startX: e.clientX,
+      startScroll: el.scrollLeft,
+    };
+    scheduleUserPause();
+  }, [scheduleUserPause]);
+
+  const onPointerMove = useCallback(
+    (e: React.PointerEvent) => {
+      const d = dragRef.current;
+      const el = scrollRef.current;
+      if (!d || !el || e.pointerId !== d.pointerId) return;
+      el.scrollLeft = d.startScroll - (e.clientX - d.startX);
+      normalizeScroll();
+    },
+    [normalizeScroll],
+  );
+
+  const onPointerUp = useCallback(
+    (e: React.PointerEvent) => {
+      const d = dragRef.current;
+      const el = scrollRef.current;
+      if (!d || e.pointerId !== d.pointerId) return;
+      dragRef.current = null;
+      try {
+        el?.releasePointerCapture(e.pointerId);
+      } catch {
+        /* ignore */
+      }
+      scheduleUserPause();
+    },
+    [scheduleUserPause],
+  );
+
+  const renderSlide = (src: string, i: number) => {
+    const caption = achievementCaptions
+      ? parseAchievementCaptionFromUrl(src)
+      : null;
+    const alt =
+      caption != null
+        ? [caption.line1, caption.line2].filter(Boolean).join(" · ")
+        : "";
+
+    if (achievementCaptions) {
+      return (
+        <div key={`${src}-${i}`} className={outerClass}>
+          <div className={`${imageBoxClass} bg-neutral-200/40`}>
+            <Image
+              src={src}
+              alt={alt}
+              fill
+              sizes={imageSizes[size]}
+              quality={88}
+              className="object-cover object-center"
+              draggable={false}
+            />
+          </div>
+          {caption != null ? (
+            <div className="max-w-full px-0.5 pt-2 text-center text-[0.65rem] uppercase leading-snug tracking-wide text-neutral-700 sm:text-[0.7rem] md:text-xs">
+              <p className="font-medium text-neutral-800">{caption.line1}</p>
+              {caption.line2 ? (
+                <p className="mt-0.5 text-neutral-600">{caption.line2}</p>
+              ) : null}
             </div>
-          );
-        })}
+          ) : null}
+        </div>
+      );
+    }
+
+    return (
+      <div key={`${src}-${i}`} className={slideClass}>
+        <Image
+          src={src}
+          alt=""
+          fill
+          sizes={imageSizes[size]}
+          quality={88}
+          className="object-cover object-center"
+          draggable={false}
+        />
+      </div>
+    );
+  };
+
+  if (loop.length === 0) {
+    return (
+      <div className={`overflow-hidden bg-neutral-900/5 ${paddingClass}`} aria-hidden />
+    );
+  }
+
+  return (
+    <div className={`bg-neutral-900/5 ${paddingClass}`}>
+      <div
+        ref={scrollRef}
+        role="region"
+        aria-label={achievementCaptions ? "Achievements gallery" : "Events gallery"}
+        tabIndex={0}
+        className={`${scrollHideClass} cursor-grab touch-pan-x overflow-x-auto overflow-y-hidden active:cursor-grabbing`}
+        onScroll={onScroll}
+        onWheel={onWheel}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerCancel={onPointerUp}
+      >
+        <div className={`flex w-max ${gapClass} items-start`}>
+          {loop.map((src, i) => renderSlide(src, i))}
+        </div>
       </div>
     </div>
   );

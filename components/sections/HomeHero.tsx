@@ -103,8 +103,13 @@ function isLogoSlide(src: string): boolean {
   return src.includes("/images/logo/");
 }
 
+/** Full image visible (no vertical crop) — logo and tall inauguration group shots */
+function isFullFrameHeroSlide(src: string): boolean {
+  return isLogoSlide(src) || src.includes("1_Ammama-inaguration");
+}
+
 function heroImageClass(src: string, normalClass: string): string {
-  if (isLogoSlide(src)) return "object-contain object-center p-2";
+  if (isFullFrameHeroSlide(src)) return "object-contain object-center p-2";
   return normalClass;
 }
 
